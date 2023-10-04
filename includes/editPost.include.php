@@ -11,8 +11,8 @@
     $pId=$_POST['pId'];
     $date=date("Y-m-d");
     
-
+    $_SESSION['pId']=$pId;
     $res = mysqli_query($conn, "UPDATE `posts` SET `title`='$title',`content`='$content', `modDate` = '$date' WHERE `pId`='$pId';");
-    header('location: ../home.php');
+    header('location: ../comment.php');
 
 ?>

@@ -42,16 +42,15 @@ if($_SESSION['cId']!=0){ ?>
 ?>
   <?php
     include 'config.php';
-    $res=mysqli_query($conn, "SELECT * FROM `posts`");
+    $res=mysqli_query($conn, "SELECT * FROM `posts` ORDER BY `pId` DESC");
     while($blogs=mysqli_fetch_assoc($res)){
         
         $tempCId=$blogs['cId'];
         $temp=mysqli_query($conn, "SELECT * FROM `contributorList` where `cId` = $tempCId;");
         $contributor=mysqli_fetch_assoc($temp);
         ?>
-        <h4><?php echo $blogs['title']?></h4>
+        <h3><?php echo $blogs['title']?></h3>
         <p>Contributor name: <?php echo $contributor['cNama']?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date: <?php echo $blogs['modDate']?></p>
-        <p><?php echo $blogs['content']?></p>
 
         <?php
             if($blogs['cId']==$_SESSION['cId']){
@@ -61,13 +60,14 @@ if($_SESSION['cId']!=0){ ?>
                         <button name="pId" value="<?php echo $blogs['pId']?>">Edit</button>
                     </form>
                     &nbsp;
-                    <form action="includes/deletePost.include.php" method="post">
+                    <form action="delete.php" method="post">
                         <button name="pId" value="<?php echo $blogs['pId']?>">Delete</button>
                     </form>
                 </div>
             <?php
             }
         ?>
+        <br>
         <form action="comment.php" method="post">
             <button name="pId" value="<?php echo $blogs['pId']?>">See More</button>
         </form>

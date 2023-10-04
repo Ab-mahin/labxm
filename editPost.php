@@ -29,8 +29,8 @@
     <button name="pId" value="<?php echo $blogs['pId']?>">POST</button><br><br>
   </form>
   <br><br>
-  <form action="home.php">
-    <button>Cancel</button>
+  <form action="comment.php" method="POST">
+    <button name="pId" value="<?php echo $blogs['pId']?>">Cancel</button>
   </form>
 </body>
 </html>
