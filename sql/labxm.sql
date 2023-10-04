@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 04, 2023 at 09:53 AM
+-- Generation Time: Oct 04, 2023 at 11:40 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -39,7 +39,8 @@ CREATE TABLE `contributorList` (
 --
 
 INSERT INTO `contributorList` (`cId`, `cNama`, `cEmail`, `cPass`) VALUES
-(1, 'Check', 'Check', 'Check');
+(1, 'Check', 'Check', 'Check'),
+(2, 'hgjhgjh', 'jgjhgj', '123');
 
 -- --------------------------------------------------------
 
@@ -51,17 +52,19 @@ CREATE TABLE `posts` (
   `pId` int(11) NOT NULL,
   `cId` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `content` varchar(255) NOT NULL
+  `content` varchar(255) NOT NULL,
+  `modDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`pId`, `cId`, `title`, `content`) VALUES
-(1, 1, 'Knowledge is power.....', 'Description'),
-(3, 2, 'Check', 'Check'),
-(4, 1, 'Honesty is the best policy.....', 'Demo Description Updated...');
+INSERT INTO `posts` (`pId`, `cId`, `title`, `content`, `modDate`) VALUES
+(1, 1, 'Knowledge is power.....', 'Description', '2023-10-04'),
+(3, 2, 'Check', 'Check', '2023-10-04'),
+(4, 1, 'Honesty is the best policy.....', 'Demo Description Updated...', '2023-10-04'),
+(5, 1, 'check date', 'check date', '2023-10-04');
 
 --
 -- Indexes for dumped tables
@@ -87,13 +90,13 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `contributorList`
 --
 ALTER TABLE `contributorList`
-  MODIFY `cId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `pId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `pId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
