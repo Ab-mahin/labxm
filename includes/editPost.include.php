@@ -9,9 +9,10 @@
     $title=$_POST['title'];
     $content=$_POST['content'];
     $pId=$_POST['pId'];
+    $date=date("Y-m-d");
     
 
-    $res = mysqli_query($conn, "UPDATE `posts` SET `title`='$title',`content`='$content' WHERE `pId`='$pId';");
+    $res = mysqli_query($conn, "UPDATE `posts` SET `title`='$title',`content`='$content', `modDate` = '$date' WHERE `pId`='$pId';");
     header('location: ../home.php');
 
 ?>

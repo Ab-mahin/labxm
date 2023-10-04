@@ -18,7 +18,7 @@ if($_SESSION['cId']!=0){ ?>
         <button>Log out</button>
     </form><br><br>
 
-    <form action="includes/addPost.include.php" method="POST">
+    <form action="includes/addPost.include.php" method="POST" enctype="multipart/form-data">
         <h4>Write a tutorial:</h4>
         <label>Title</label><br>
         <input type="text" name="title" placeholder="Knowledge is power........">
@@ -26,6 +26,7 @@ if($_SESSION['cId']!=0){ ?>
         <label>Description</label><br>
         <input type="text" name="content" placeholder="Description">
         <br><br>
+        <input type="file" name="img"><br><br>
         <button>POST</button><br><br>
     </form>
     <?php 
@@ -67,6 +68,9 @@ if($_SESSION['cId']!=0){ ?>
             <?php
             }
         ?>
+        <form action="comment.php" method="post">
+            <button name="pId" value="<?php echo $blogs['pId']?>">See More</button>
+        </form>
         <br><br>
         <?php
     }
