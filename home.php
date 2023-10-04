@@ -12,28 +12,46 @@
     <title>Home</title>
 </head>
 <body>
+<?php
+if($_SESSION['cId']!=0){ ?>
+    <form action="includes/logout.include.php">
+        <button>Log out</button>
+    </form><br><br>
 
-<form action="includes/logout.include.php">
-    <button>Log out</button>
-</form><br><br>
+    <form action="includes/addPost.include.php" method="POST">
+        <h4>Write a tutorial:</h4>
+        <label>Title</label><br>
+        <input type="text" name="title" placeholder="Knowledge is power........">
+        <br><br>
+        <label>Description</label><br>
+        <input type="text" name="content" placeholder="Description">
+        <br><br>
+        <button>POST</button><br><br>
+    </form>
+    <?php 
+    }
+    else{
+        ?>
+        <form action="login.php">
+            <button>Log In</button>
+        </form><br><br>
 
-<form action="includes/addPost.include.php" method="POST">
-    <h4>Write a tutorial:</h4>
-    <label>Title</label><br>
-    <input type="text" name="title" placeholder="Knowledge is power........">
-    <br><br>
-    <label>Description</label><br>
-    <input type="text" name="content" placeholder="Description">
-    <br><br>
-    <button>POST</button><br><br>
-  </form>
+        <?php
+    }
+?>
   <?php
     include 'config.php';
     $res=mysqli_query($conn, "SELECT * FROM `posts`");
     while($blogs=mysqli_fetch_assoc($res)){
+        
+        $tempCId=$blogs['cId'];
+        $temp=mysqli_query($conn, "SELECT * FROM `contributorList` where `cId` = $tempCId;");
+        $contributor=mysqli_fetch_assoc($temp);
         ?>
         <h4><?php echo $blogs['title']?></h4>
+        <p>Contributor name: <?php echo $contributor['cNama']?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Date: <?php echo $blogs['modDate']?></p>
         <p><?php echo $blogs['content']?></p>
+
         <?php
             if($blogs['cId']==$_SESSION['cId']){
             ?>
