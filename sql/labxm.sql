@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 04, 2023 at 11:40 AM
+-- Generation Time: Oct 04, 2023 at 11:45 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -20,6 +20,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `labxm`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment`
+--
+
+CREATE TABLE `comment` (
+  `cmId` int(11) NOT NULL,
+  `pId` int(11) NOT NULL,
+  `com` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -71,6 +83,12 @@ INSERT INTO `posts` (`pId`, `cId`, `title`, `content`, `modDate`) VALUES
 --
 
 --
+-- Indexes for table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`cmId`);
+
+--
 -- Indexes for table `contributorList`
 --
 ALTER TABLE `contributorList`
@@ -85,6 +103,12 @@ ALTER TABLE `posts`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `cmId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `contributorList`
