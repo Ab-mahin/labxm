@@ -25,19 +25,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $blogs['title']?></title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./fontawesome-free-6.4.2-web/css/all.css">
 </head>
 <body>
-
+    <div class="container-fluid">
         <?php
             if($_SESSION['cId']!=0){ ?>
                 <form action="includes/logout.include.php">
-                    <button>Log out</button>
+                    <button id = "main-btn">Log out</button>
                 </form><br><br>
             <?php }
         ?>
 
         <form action="home.php">
-            <button>Home</button>
+            <button id = "main-btn" >Home</button>
         </form><br><br>
 
         <h3><?php echo $blog['title']?></h3>
@@ -52,11 +55,11 @@
             ?>
                 <div style="display:flex">
                     <form action="editPost.php" method="post">
-                        <button name="pId" value="<?php echo $blog['pId']?>">Edit</button>
+                        <button id = "main-btn" name="pId" value="<?php echo $blog['pId']?>">Edit</button>
                     </form>
                     &nbsp;
                     <form action="delete.php" method="post">
-                        <button name="pId" value="<?php echo $blog['pId']?>">Delete</button>
+                        <button id = "main-btn" name="pId" value="<?php echo $blog['pId']?>">Delete</button>
                     </form>
                 </div>
             <?php
@@ -64,18 +67,19 @@
         ?>
 
         <h4>Comments</h4>
-        <?php
-            while($comment = mysqli_fetch_assoc($com)){
-                ?>
-                    <h4><?php echo $comment['cmId']?>.</h4>
-                    <p><?php echo $comment['com']?></p>
-                <?php
-            }
-        ?>
+            <?php
+                while($comment = mysqli_fetch_assoc($com)){
+                    ?>
+                        <h4><?php echo $comment['cmId']?>.</h4>
+                        <p><?php echo $comment['com']?></p>
+                    <?php
+                }
+            ?>
         <form action="includes/addComment.include.php" method="POST" enctype="multipart/form-data">
-            <input type="text" name="com" placeholder="Write a comment.....">
+            <input id = "com-btn" type="text" name="com" placeholder="Write a comment.....">
             <br><br>
-            <button name="pId" value="<?php echo $blog['pId']?>">Comment</button><br><br>
+            <button id = "main-btn" name="pId" value="<?php echo $blog['pId']?>">Comment</button><br><br>
         </form>
+    </div>
 </body>
 </html>
