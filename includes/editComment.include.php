@@ -6,12 +6,10 @@
 
     include '../config.php';
 
-    $pId=$_POST['pId'];
     $com=$_POST['com'];
-    $cId=$_SESSION['cId'];
+    $cmId=$_POST['cmId'];
 
-    mysqli_query($conn, "INSERT INTO `comment` (`cmId`, `pId`, `com`, `cId`) VALUES (NULL, '$pId', '$com', '$cId');");
-    $_SESSION['pId']=$pId;
+    $res = mysqli_query($conn, "UPDATE `comment` SET `com`='$com' WHERE `cmId`='$cmId';");
     header('location: ../comment.php');
 
 ?>

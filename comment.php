@@ -7,9 +7,11 @@
     $pId=0;
     if($_SESSION['pId']!=0){
         $pId=$_SESSION['pId'];
-        $_SESSION['pId']=0;
     }
-    else $pId=$_POST['pId'];
+    else{
+        $pId=$_POST['pId'];
+        $_SESSION['pId']=$pId;
+    }
     $res=mysqli_query($conn, "SELECT * FROM `posts` where `pId`='$pId'");
     $blog=mysqli_fetch_assoc($res);
 
@@ -69,17 +71,38 @@
         <h4>Comments</h4>
             <?php
                 while($comment = mysqli_fetch_assoc($com)){
+                    $cId=$comment['cId'];
+                    $res=mysqli_query($conn, "SELECT * FROM `contributorList` where `cId`='$cId';");
+                    $contributor=mysqli_fetch_assoc($res);
                     ?>
-                        <h4><?php echo $comment['cmId']?>.</h4>
+                        <h4><?php echo $contributor['cNama']?></h4>
                         <p><?php echo $comment['com']?></p>
+
+                        <?php
+                            if($comment['cId']==$_SESSION['cId']){
+                            ?>
+                                <div style="display:flex">
+                                    <form action="editComment.php" method="post">
+                                        <button id = "main-btn" name="cmId" value="<?php echo $comment['cmId']?>">Edit</button>
+                                    </form>
+                                    &nbsp;
+                                    <form action="deleteComment.php" method="post">
+                                        <button id = "main-btn" name="cmId" value="<?php echo $comment['cmId']?>">Delete</button>
+                                    </form>
+                                </div>
+                            <?php
+                            }
+                        ?>
                     <?php
                 }
             ?>
-        <form action="includes/addComment.include.php" method="POST" enctype="multipart/form-data">
-            <input id = "com-btn" type="text" name="com" placeholder="Write a comment.....">
-            <br><br>
-            <button id = "main-btn" name="pId" value="<?php echo $blog['pId']?>">Comment</button><br><br>
-        </form>
+        <?php if($_SESSION['cId']!=0) { ?>
+            <form action="includes/addComment.include.php" method="POST" enctype="multipart/form-data">
+                <input id = "com-btn" type="text" name="com" placeholder="Write a comment.....">
+                <br><br>
+                <button id = "main-btn" name="pId" value="<?php echo $blog['pId']?>">Comment</button><br><br>
+            </form>
+        <?php } ?>
     </div>
 </body>
 </html>

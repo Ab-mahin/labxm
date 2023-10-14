@@ -3,6 +3,7 @@
     if(!isset($_SESSION['cId'])) {
         header('location: login.php');
     }
+    $_SESSION['pId']=0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
